@@ -1,0 +1,19 @@
+{
+  "name": "silly-goat",
+  "version": "0.0.0",
+  "private": true,
+  "author": "David Chambers <dc@davidchambers.me>",
+  "description": "A simple helpful robot for your Company",
+  "dependencies": {
+    "hubot": "2.19.0",
+    "hubot-gitter2": "huafu/hubot-gitter2#57d5d8d23733a1925cafbcee00a0d55b98115b53",
+    "sanctuary": "*",
+    "sanctuary-def": "*",
+    "sanctuary-int": "*",
+    "sanctuary-type-classes": "*"
+  },
+  "devDependencies": {
+    "eslint": "2.9.x",
+    "sanctuary-style": "0.4.x"
+  }
+}
