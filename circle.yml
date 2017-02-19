@@ -1,11 +1,7 @@
-dependencies:
-  override:
-    - make setup
-
 machine:
   node:
     version: 6
 
 test:
   override:
-    - make lint
+    - npm run lint
