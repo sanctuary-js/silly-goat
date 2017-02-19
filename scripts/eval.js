@@ -13,7 +13,7 @@ const evaluate = S.encaseEither3_(
   S.I,
   vm.runInNewContext,
   S.__,
-  {$: $, Int: Int, S: S, Z: Z},
+  {$, Int, S, Z},
   {timeout: 5000}
 );
 
