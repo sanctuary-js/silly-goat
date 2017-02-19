@@ -27,10 +27,10 @@ S.curry2((lang, code) => `${backticks}${lang}\n${code}\n${backticks}`);
 
 module.exports = bot => {
 
-  bot.respond(/```(javascript|js)$([\s\S]*)```/m, res => {
+  bot.respond(/```(?:javascript|js)?$([\s\S]*)```/m, res => {
     res.send(S.either(S.compose(formatCodeBlock('text'), S.prop('message')),
                       S.compose(formatCodeBlock('javascript'), S.toString),
-                      evaluate(res.match[2])));
+                      evaluate(res.match[1])));
   });
 
 };

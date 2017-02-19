@@ -17,7 +17,8 @@ In Markdown, a JavaScript code block looks like this:
     S.map(S.inc, [1, 2, 3])
     ```
 
-`js` may be used in place of `javascript` if desired.
+`js` may be used in place of `javascript`, or the language may be left
+unspecified.
 
 
 [1]: https://hubot.github.com/
