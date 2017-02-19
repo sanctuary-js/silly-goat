@@ -1,29 +1,35 @@
 'use strict';
 
-var S = require('sanctuary');
+const S = require('sanctuary');
 
-var pkg = require('../package.json');
+const pkg = require('../package.json');
 
 
-var deps = S.keys(pkg.dependencies).sort().reduce(function($acc, name) {
+//    deps :: { hubot :: Array String, other :: Array String }
+const deps = S.keys(pkg.dependencies).sort().reduce(($acc, name) => {
   $acc[/^hubot(-|$)/.test(name) ? 'hubot' : 'other'].push(name);
   return $acc;
 }, {hubot: [], other: []});
 
-function version(name) {
-  return name + '@' + require(name + '/package.json').version;
-}
+//    version :: String -> String
+const version = name => `${name}@${require(`${name}/package.json`).version}`;
 
-var versions =
-  '```text\nNode ' + process.version + '\n\n' +
-  S.unlines(S.map(version, deps.hubot)) + '\n' +
-  S.unlines(S.map(version, deps.other)) + '```';
+//    backticks :: String
+const backticks = '```';
+
+//    versions :: String
+const versions =
+`${backticks}
+Node ${process.version}
+
+${S.joinWith('\n', S.map(version, deps.hubot))}
+
+${S.joinWith('\n', S.map(version, deps.other))}
+${backticks}`;
 
 
-module.exports = function(bot) {
+module.exports = bot => {
 
-  bot.respond(/versions/, function(res) {
-    res.send(versions);
-  });
+  bot.respond(/versions/, res => { res.send(versions); });
 
 };

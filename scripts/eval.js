@@ -1,15 +1,15 @@
 'use strict';
 
-var vm = require('vm');
+const vm = require('vm');
 
-var S = require('sanctuary');
-var $ = require('sanctuary-def');
-var Int = require('sanctuary-int');
-var Z = require('sanctuary-type-classes');
+const S = require('sanctuary');
+const $ = require('sanctuary-def');
+const Int = require('sanctuary-int');
+const Z = require('sanctuary-type-classes');
 
 
-//  evaluate :: String -> Either Error Any
-var evaluate = S.encaseEither3_(
+//    evaluate :: String -> Either Error Any
+const evaluate = S.encaseEither3_(
   S.I,
   vm.runInNewContext,
   S.__,
@@ -17,15 +17,17 @@ var evaluate = S.encaseEither3_(
   {timeout: 5000}
 );
 
-//  formatCodeBlock :: String -> String -> String
-var formatCodeBlock = S.curry2(function(lang, code) {
-  return '```' + lang + '\n' + code + '\n```';
-});
+//    backticks :: String
+const backticks = '```';
+
+//    formatCodeBlock :: String -> String -> String
+const formatCodeBlock =
+S.curry2((lang, code) => `${backticks}${lang}\n${code}\n${backticks}`);
 
 
-module.exports = function(bot) {
+module.exports = bot => {
 
-  bot.respond(/```(javascript|js)$([\s\S]*)```/m, function(res) {
+  bot.respond(/```(javascript|js)$([\s\S]*)```/m, res => {
     res.send(S.either(S.compose(formatCodeBlock('text'), S.prop('message')),
                       S.compose(formatCodeBlock('javascript'), S.toString),
                       evaluate(res.match[2])));
