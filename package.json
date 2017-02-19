@@ -2,7 +2,7 @@
   "name": "silly-goat",
   "private": true,
   "scripts": {
-    "start": "hubot --adapter gitter2 --alias / --name silly-goat"
+    "start": "PATH=\"node_modules/.bin:$PATH\" hubot --adapter gitter2 --alias / --name silly-goat"
   },
   "dependencies": {
     "hubot": "2.19.0",
