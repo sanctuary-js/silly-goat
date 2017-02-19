@@ -19,4 +19,4 @@ RUN npm install --production
 
 COPY . .
 
-ENTRYPOINT ["dumb-init", "bin/hubot"]
+ENTRYPOINT ["dumb-init", "npm", "run", "start"]

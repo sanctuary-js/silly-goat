@@ -1,6 +1,9 @@
 {
   "name": "silly-goat",
   "private": true,
+  "scripts": {
+    "start": "hubot --adapter gitter2 --alias / --name silly-goat"
+  },
   "dependencies": {
     "hubot": "2.19.0",
     "hubot-gitter2": "huafu/hubot-gitter2#57d5d8d23733a1925cafbcee00a0d55b98115b53",
