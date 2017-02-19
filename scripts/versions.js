@@ -12,7 +12,10 @@ const deps = S.keys(pkg.dependencies).sort().reduce(($acc, name) => {
 }, {hubot: [], other: []});
 
 //    version :: String -> String
-const version = name => `${name}@${require(`${name}/package.json`).version}`;
+const version = name => {
+  const v = pkg.dependencies[name];
+  return `${name}@${v === '*' ? require(`${name}/package.json`).version : v}`;
+};
 
 //    backticks :: String
 const backticks = '```';
