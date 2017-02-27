@@ -2,6 +2,7 @@
 
 const vm = require('vm');
 
+const R = require('ramda');
 const S = require('sanctuary');
 const $ = require('sanctuary-def');
 const Int = require('sanctuary-int');
@@ -28,7 +29,7 @@ def('evaluate',
     S.encaseEither3_(S.I,
                      vm.runInNewContext,
                      S.__,
-                     {$, Int, S, Z},
+                     {$, Int, R, S, Z},
                      {timeout: 5000}));
 
 //    backticks :: String
