@@ -21,16 +21,22 @@ const env = Z.concat(S.env, [Language]);
 //    def :: String -> StrMap TypeClass -> Array Type -> Function -> Function
 const def = $.create({checkTypes, env});
 
-//    evaluate :: String -> Either Error Any
+//    evaluate :: String -> Either String String
 const evaluate =
 def('evaluate',
     {},
-    [$.String, S.EitherType($.Error, $.Any)],
-    S.encaseEither3_(S.I,
-                     vm.runInNewContext,
-                     S.__,
-                     {$, Int, R, S, Z},
-                     {timeout: 5000}));
+    [$.String, S.EitherType($.String, $.String)],
+    code => {
+      const logs = [];
+      const log = (...args) => { logs.push(args.map(String).join(', ')); };
+      return S.map(x => S.unlines(S.map(S.concat('log: '), logs)) +
+                        S.toString(x),
+                   S.encaseEither3_(S.prop('message'),
+                                    vm.runInNewContext,
+                                    code,
+                                    {$, Int, R, S, Z, console: {log}},
+                                    {timeout: 5000}));
+    });
 
 //    backticks :: String
 const backticks = '```';
@@ -46,8 +52,8 @@ def('formatCodeBlock',
 module.exports = bot => {
 
   bot.respond(/```(?:javascript|js)?$([\s\S]*)```/m, res => {
-    res.send(S.either(S.compose(formatCodeBlock('text'), S.prop('message')),
-                      S.compose(formatCodeBlock('javascript'), S.toString),
+    res.send(S.either(formatCodeBlock('text'),
+                      formatCodeBlock('javascript'),
                       evaluate(res.match[1])));
   });
 
