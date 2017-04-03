@@ -15,7 +15,7 @@
     "sanctuary-type-classes": "*"
   },
   "devDependencies": {
-    "eslint": "2.9.x",
-    "sanctuary-style": "0.4.x"
+    "eslint": "3.19.x",
+    "sanctuary-style": "0.5.x"
   }
 }
