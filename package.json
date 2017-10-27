@@ -2,7 +2,7 @@
   "name": "silly-goat",
   "private": true,
   "scripts": {
-    "lint": "eslint --config node_modules/sanctuary-style/eslint-es6.json --env es6 --env node -- scripts",
+    "lint": "eslint --config node_modules/sanctuary-style/eslint-es6.json --env es6 --env node --report-unused-disable-directives -- scripts",
     "start": "PATH=\"node_modules/.bin:$PATH\" hubot --adapter gitter2 --alias / --name silly-goat"
   },
   "dependencies": {
@@ -15,7 +15,7 @@
     "sanctuary-type-classes": "*"
   },
   "devDependencies": {
-    "eslint": "3.19.x",
-    "sanctuary-style": "0.5.x"
+    "eslint": "4.9.x",
+    "sanctuary-style": "1.0.x"
   }
 }
