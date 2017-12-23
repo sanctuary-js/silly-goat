@@ -9,10 +9,11 @@
     "hubot": "2.19.0",
     "hubot-gitter2": "huafu/hubot-gitter2#57d5d8d23733a1925cafbcee00a0d55b98115b53",
     "ramda": "*",
-    "sanctuary": "*",
-    "sanctuary-def": "*",
+    "sanctuary": "0.14.1",
+    "sanctuary-def": "0.14.0",
     "sanctuary-int": "*",
-    "sanctuary-type-classes": "*"
+    "sanctuary-type-classes": "7.1.1",
+    "sanctuary-type-identifiers": "2.0.1"
   },
   "devDependencies": {
     "eslint": "4.9.x",
