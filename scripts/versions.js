@@ -22,7 +22,7 @@ const backticks = '```';
 
 //    versions :: String
 const versions =
-`${backticks}
+`${backticks}text
 Node ${process.version}
 
 ${S.joinWith('\n', S.map(version, deps.hubot))}
