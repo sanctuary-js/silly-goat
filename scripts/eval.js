@@ -31,11 +31,11 @@ def('evaluate',
       const log = (...args) => { logs.push(args.map(String).join(', ')); };
       return S.map(x => S.unlines(S.map(S.concat('log: '), logs)) +
                         S.toString(x),
-                   S.encaseEither3_(S.prop('message'),
-                                    vm.runInNewContext,
-                                    code,
-                                    {$, Int, R, S, Z, console: {log}},
-                                    {timeout: 5000}));
+                   S.encaseEither3(S.prop('message'),
+                                   S.curry3(vm.runInNewContext),
+                                   code,
+                                   {$, Int, R, S, Z, console: {log}},
+                                   {timeout: 5000}));
     });
 
 //    backticks :: String
