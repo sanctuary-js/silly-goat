@@ -7,7 +7,7 @@
   },
   "dependencies": {
     "hubot": "2.19.0",
-    "hubot-gitter2": "huafu/hubot-gitter2#57d5d8d23733a1925cafbcee00a0d55b98115b53",
+    "hubot-gitter2": "1.0.0",
     "ramda": "*",
     "sanctuary": "0.14.1",
     "sanctuary-def": "0.14.0",
