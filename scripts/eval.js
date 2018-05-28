@@ -1,25 +1,31 @@
 'use strict';
 
-const vm = require('vm');
+const vm            = require('vm');
 
-const R = require('ramda');
-const S = require('sanctuary');
-const $ = require('sanctuary-def');
-const Int = require('sanctuary-int');
-const Z = require('sanctuary-type-classes');
+const R             = require('ramda');
+const S             = require('sanctuary');
+const $             = require('sanctuary-def');
+const Descending    = require('sanctuary-descending');
+const Int           = require('sanctuary-int');
+const Z             = require('sanctuary-type-classes');
+const type          = require('sanctuary-type-identifiers');
 
 
 //    Language :: Type
 const Language = $.EnumType('silly-goat/Language', '', ['javascript', 'text']);
 
-//    checkTypes :: Boolean
-const checkTypes = true;
-
-//    env :: Array Type
-const env = Z.concat(S.env, [Language]);
-
 //    def :: String -> StrMap TypeClass -> Array Type -> Function -> Function
-const def = $.create({checkTypes, env});
+const def = $.create({
+  checkTypes: true,
+  env: S.env.concat([
+    $.UnaryType
+      ('silly-goat/Descending')
+      ('https://github.com/sanctuary-js/sanctuary-descending')
+      (x => type(x) === 'sanctuary-descending/Descending@1')
+      (descending => [Z.extract(descending)])
+      ($.Unknown),
+  ]),
+});
 
 //    evaluate :: String -> Either String String
 const evaluate =
@@ -34,7 +40,8 @@ def('evaluate',
                    S.encaseEither3(S.prop('message'),
                                    S.curry3(vm.runInNewContext),
                                    code,
-                                   {$, Int, R, S, Z, console: {log}},
+                                   {$, Descending, Int, R, S, Z,
+                                    console: {log}},
                                    {timeout: 5000}));
     });
 
