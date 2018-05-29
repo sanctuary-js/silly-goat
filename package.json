@@ -2,7 +2,7 @@
   "name": "silly-goat",
   "private": true,
   "scripts": {
-    "lint": "eslint --config node_modules/sanctuary-style/eslint-es6.json --env es6 --env node --report-unused-disable-directives --rule 'func-call-spacing: [off]' --rule 'indent: [off]' --rule 'no-unexpected-multiline: [off]' --rule 'object-property-newline: [off]' -- scripts",
+    "lint": "eslint --config node_modules/sanctuary-style/eslint-es6.json --env es6 --env node --report-unused-disable-directives -- scripts",
     "start": "PATH=\"node_modules/.bin:$PATH\" hubot --adapter gitter2 --alias / --name silly-goat"
   },
   "dependencies": {
@@ -18,6 +18,6 @@
   },
   "devDependencies": {
     "eslint": "4.9.x",
-    "sanctuary-style": "1.0.x"
+    "sanctuary-style": "2.0.x"
   }
 }
