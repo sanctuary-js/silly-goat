@@ -6,6 +6,7 @@ const R             = require ('ramda');
 const S_            = require ('sanctuary');
 const $             = require ('sanctuary-def');
 const Descending    = require ('sanctuary-descending');
+const Identity      = require ('sanctuary-identity');
 const Int           = require ('sanctuary-int');
 const Z             = require ('sanctuary-type-classes');
 const type          = require ('sanctuary-type-identifiers');
@@ -18,6 +19,12 @@ const env = S_.env.concat ([
     ('https://github.com/sanctuary-js/sanctuary-descending')
     (x => type (x) === 'sanctuary-descending/Descending@1')
     (descending => [Z.extract (descending)])
+    ($.Unknown),
+  $.UnaryType
+    ('silly-goat/Identity')
+    ('https://github.com/sanctuary-js/sanctuary-identity')
+    (x => type (x) === 'sanctuary-identity/Identity@1')
+    (identity => [Z.extract (identity)])
     ($.Unknown),
 ]);
 
@@ -46,7 +53,7 @@ def ('evaluate',
                      S.encaseEither3 (S.prop ('message'),
                                       S.curry3 (vm.runInNewContext),
                                       code,
-                                      {$, Descending, Int, R, S, Z,
+                                      {$, Descending, Identity, Int, R, S, Z,
                                        console: {log}},
                                       {timeout: 5000}));
        /* eslint-enable object-property-newline */
