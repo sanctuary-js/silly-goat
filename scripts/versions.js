@@ -28,9 +28,9 @@ const versions =
 `${backticks}text
 Node ${process.version}
 
-${S.joinWith ('\n', S.map (version, deps.hubot))}
+${S.joinWith ('\n') (S.map (version) (deps.hubot))}
 
-${S.joinWith ('\n', S.map (version, deps.other))}
+${S.joinWith ('\n') (S.map (version) (deps.other))}
 ${backticks}`;
 
 

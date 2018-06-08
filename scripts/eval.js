@@ -39,23 +39,23 @@ const def = $.create (opts);
 
 //    evaluate :: String -> Either String String
 const evaluate =
-def ('evaluate',
-     {},
-     [$.String, S.EitherType ($.String, $.String)],
-     code => {
+def ('evaluate')
+    ({})
+    ([$.String, S.EitherType ($.String) ($.String)])
+    (code => {
        const logs = [];
        const log = (...args) => {
-         logs.push ((args.map (String)).join (', '));
+         logs.push (S.joinWith (', ') (S.map (String) (args)));
        };
        /* eslint-disable object-property-newline */
-       return S.map (x => S.unlines (S.map (S.concat ('log: '), logs)) +
-                          S.toString (x),
-                     S.encaseEither3 (S.prop ('message'),
-                                      S.curry3 (vm.runInNewContext),
-                                      code,
-                                      {$, Descending, Identity, Int, R, S, Z,
-                                       console: {log}},
-                                      {timeout: 5000}));
+       return S.map (x => S.unlines (S.map (S.concat ('log: ')) (logs)) +
+                          S.show (x))
+                    (S.encaseEither3 (S.prop ('message'))
+                                     (S.curry3 (vm.runInNewContext))
+                                     (code)
+                                     ({$, Descending, Identity, Int, R, S, Z,
+                                       console: {log}})
+                                     ({timeout: 5000}));
        /* eslint-enable object-property-newline */
      });
 
@@ -64,18 +64,18 @@ const backticks = '```';
 
 //    formatCodeBlock :: String -> String -> String
 const formatCodeBlock =
-def ('formatCodeBlock',
-     {},
-     [$.String, $.String, $.String],
-     (lang, code) => `${backticks}${lang}\n${code}\n${backticks}`);
+def ('formatCodeBlock')
+    ({})
+    ([$.String, $.String, $.String])
+    (lang => code => `${backticks}${lang}\n${code}\n${backticks}`);
 
 
 module.exports = bot => {
 
   bot.respond (/```(?:javascript|js)?$([\s\S]*)```/m, res => {
-    res.send (S.either (formatCodeBlock ('text'),
-                        formatCodeBlock ('javascript'),
-                        evaluate (res.match[1])));
+    res.send (S.either (formatCodeBlock ('text'))
+                       (formatCodeBlock ('javascript'))
+                       (evaluate (res.match[1])));
   });
 
 };
