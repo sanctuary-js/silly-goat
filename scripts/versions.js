@@ -11,7 +11,7 @@ S.reduce ($acc => name => {
             $acc[/^hubot(-|$)/.test (name) ? 'hubot' : 'other'].push (name);
             return $acc;
           })
-         ({hubot: [], other: []});
+         ({hubot: [], other: []})
          (S.sort (S.keys (pkg.dependencies)));
 
 //    version :: String -> String
