@@ -1,4 +1,4 @@
-FROM nodesource/node:6
+FROM nodesource/node:10
 
 ADD https://github.com/Yelp/dumb-init/releases/download/v1.2.0/dumb-init_1.2.0_amd64 /usr/local/bin/dumb-init
 
