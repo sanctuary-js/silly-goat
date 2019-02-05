@@ -2,6 +2,8 @@
 
 const vm            = require ('vm');
 
+const Future        = require ('fluture');
+const fst           = require ('fluture-sanctuary-types');
 const R             = require ('ramda');
 const S_            = require ('sanctuary');
 const $             = require ('sanctuary-def');
@@ -13,7 +15,7 @@ const type          = require ('sanctuary-type-identifiers');
 
 
 //    env :: Array Type
-const env = S_.env.concat ([
+const env = S_.env.concat (fst.env, [
   $.UnaryType
     ('silly-goat/Descending')
     ('https://github.com/sanctuary-js/sanctuary-descending')
@@ -47,16 +49,21 @@ def ('evaluate')
        const log = (...args) => {
          logs.push (S.joinWith (', ') (S.map (String) (args)));
        };
-       /* eslint-disable object-property-newline */
        return S.map (x => S.unlines (S.map (S.concat ('log: ')) (logs)) +
                           S.show (x))
                     (S.encaseEither3 (S.prop ('message'))
                                      (S.curry3 (vm.runInNewContext))
                                      (code)
-                                     ({$, Descending, Identity, Int, R, S, Z,
+                                     ({$,
+                                       Descending,
+                                       Future,
+                                       Identity,
+                                       Int,
+                                       R,
+                                       S,
+                                       Z,
                                        console: {log}})
                                      ({timeout: 5000}));
-       /* eslint-enable object-property-newline */
      });
 
 //    backticks :: String

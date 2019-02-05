@@ -6,6 +6,8 @@
     "start": "PATH=\"node_modules/.bin:$PATH\" hubot --adapter gitter2 --alias / --name silly-goat"
   },
   "dependencies": {
+    "fluture": "10.3.1",
+    "fluture-sanctuary-types": "3.0.0",
     "hubot": "3.0.1",
     "hubot-gitter2": "1.0.0",
     "ramda": "*",
