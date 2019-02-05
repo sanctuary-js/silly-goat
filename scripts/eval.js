@@ -46,11 +46,10 @@ def ('evaluate')
     ([$.String, S.EitherType ($.String) ($.String)])
     (code => {
        const logs = [];
-       const log = (...args) => {
-         logs.push (S.joinWith (', ') (S.map (String) (args)));
+       const log = level => (...args) => {
+         logs.push (level + ': ' + S.joinWith (', ') (S.map (String) (args)));
        };
-       return S.map (x => S.unlines (S.map (S.concat ('log: ')) (logs)) +
-                          S.show (x))
+       return S.map (x => S.unlines (logs) + S.show (x))
                     (S.encaseEither3 (S.prop ('message'))
                                      (S.curry3 (vm.runInNewContext))
                                      (code)
@@ -62,7 +61,8 @@ def ('evaluate')
                                        R,
                                        S,
                                        Z,
-                                       console: {log}})
+                                       console: {error: log ('error'),
+                                                 log: log ('log')}})
                                      ({timeout: 5000}));
      });
 
