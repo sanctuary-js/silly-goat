@@ -20,7 +20,7 @@
     "sanctuary-type-identifiers": "2.0.1"
   },
   "devDependencies": {
-    "eslint": "4.9.x",
-    "sanctuary-style": "2.0.x"
+    "eslint": "5.15.x",
+    "sanctuary-style": "3.0.x"
   }
 }
