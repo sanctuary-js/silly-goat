@@ -11,7 +11,7 @@
     "hubot": "3.0.1",
     "hubot-gitter2": "1.0.0",
     "ramda": "*",
-    "sanctuary": "1.0.0",
+    "sanctuary": "1.1.0",
     "sanctuary-def": "0.19.0",
     "sanctuary-descending": "1.1.0",
     "sanctuary-identity": "1.1.0",
