@@ -10,10 +10,24 @@ const Descending    = require ('sanctuary-descending');
 const Identity      = require ('sanctuary-identity');
 const Int           = require ('sanctuary-int');
 const Z             = require ('sanctuary-type-classes');
+const type          = require ('sanctuary-type-identifiers');
+const Useless       = require ('sanctuary-useless');
+const Useless$pkg   = require ('sanctuary-useless/package.json');
 
+
+//    $Useless :: Type
+const $Useless = $.NullaryType
+  ('Useless')
+  ('https://github.com/sanctuary-js/sanctuary-useless/tree/v' +
+   Useless$pkg.version)
+  ([])
+  (x => type (x) === Useless.constructor['@@type']);
+
+//    env :: Array Type
+const env = $.env.concat ([$Useless]);
 
 //    opts :: { checkTypes :: Boolean, env :: Array Type }
-const opts = {checkTypes: true, env: $.env};
+const opts = {checkTypes: true, env};
 
 //    S :: Module
 const S = create (opts);
@@ -42,6 +56,7 @@ def ('evaluate')
                                             Int,
                                             R,
                                             S,
+                                            Useless,
                                             Z,
                                             console: {error: log ('error'),
                                                       log: log ('log')}}))
