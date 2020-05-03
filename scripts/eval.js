@@ -22,7 +22,7 @@ const $Useless = $.NullaryType
   ('https://github.com/sanctuary-js/sanctuary-useless/tree/v' +
    Useless$pkg.version)
   ([])
-  (x => type (x) === Useless.constructor['@@type']);
+  (x => type (x) === Useless['@@type']);
 
 //    env :: Array Type
 const env = $.env.concat (fst.env.concat ([$Useless]));
