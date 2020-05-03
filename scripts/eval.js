@@ -3,6 +3,7 @@
 const vm            = require ('vm');
 
 const Future        = require ('fluture');
+const fst           = require ('fluture-sanctuary-types');
 const R             = require ('ramda');
 const {create}      = require ('sanctuary');
 const $             = require ('sanctuary-def');
@@ -24,7 +25,7 @@ const $Useless = $.NullaryType
   (x => type (x) === Useless.constructor['@@type']);
 
 //    env :: Array Type
-const env = $.env.concat ([$Useless]);
+const env = $.env.concat (fst.env.concat ([$Useless]));
 
 //    opts :: { checkTypes :: Boolean, env :: Array Type }
 const opts = {checkTypes: true, env};
