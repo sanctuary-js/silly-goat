@@ -44,7 +44,7 @@ def ('evaluate')
     (code => {
        const logs = [];
        const log = level => (...args) => {
-         logs.push (level + ': ' + S.joinWith (', ') (S.map (String) (args)));
+         logs.push (level + ': ' + S.joinWith (', ') (S.map (S.show) (args)));
        };
        return S.bimap (S.prop ('message'))
                       (x => S.unlines (logs) + S.show (x))
