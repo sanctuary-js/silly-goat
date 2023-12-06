@@ -7,7 +7,7 @@
   },
   "dependencies": {
     "fluture": "12.2.0",
-    "fluture-sanctuary-types": "6.0.0",
+    "fluture-sanctuary-types": "7.0.0",
     "hubot": "3.0.1",
     "hubot-gitter2": "1.0.0",
     "ramda": "*",
